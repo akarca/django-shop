@@ -10,6 +10,8 @@ from polymorphic.polymorphic_model import PolymorphicModel
 from shop.cart.modifiers_pool import cart_modifiers_pool
 from shop.util.fields import CurrencyField
 from shop.util.loader import get_model_string
+from autoslug import AutoSlugField
+
 import django
 
 
@@ -24,7 +26,10 @@ class BaseProduct(PolymorphicModel):
     """
 
     name = models.CharField(max_length=255, verbose_name=_('Name'))
-    slug = models.SlugField(verbose_name=_('Slug'), unique=True)
+    slug = AutoSlugField(populate_from='name',
+                         unique=True,
+                         verbose_name=_('Slug'))
+    #slug = models.SlugField(verbose_name=_('Slug'), unique=True)
     active = models.BooleanField(default=False, verbose_name=_('Active'))
     date_added = models.DateTimeField(auto_now_add=True,
         verbose_name=_('Date added'))

@@ -75,7 +75,7 @@ class CartItemDetail(ShopView):
             cart_object = get_or_create_cart(self.request)
             return HttpResponse(json.dumps({
                                 "success": True,
-                                "cart": cart_object.total_quantity()
+                                "cart": cart_object.total_quantity
                                 }))
         else:
             return HttpResponseRedirect(reverse('cart'))

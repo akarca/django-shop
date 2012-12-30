@@ -9,6 +9,7 @@ from shop.models.productmodel import Product
 from shop.util.cart import get_or_create_cart
 from shop.views import ShopView, ShopTemplateResponseMixin
 
+import simplejson as json
 
 class CartItemDetail(ShopView):
     """
@@ -71,7 +72,11 @@ class CartItemDetail(ShopView):
         Generic hook by default redirects to cart
         """
         if self.request.is_ajax():
-            return HttpResponse('Ok<br />')
+            cart_object = get_or_create_cart(self.request)
+            return HttpResponse(json.dumps({
+                                "success": True,
+                                "cart": cart_object.total_quantity()
+                                }))
         else:
             return HttpResponseRedirect(reverse('cart'))
 

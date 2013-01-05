@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from shop.addressmodel.models import City, Town, Address
+from shop.addressmodel.models import City, Township, Address
 
 #class ClientAdmin(ModelAdmin):
 #    pass
@@ -11,7 +11,7 @@ from shop.addressmodel.models import City, Town, Address
 class CityAdmin(ModelAdmin):
     pass
 
-class TownAdmin(ModelAdmin):
+class TownshipAdmin(ModelAdmin):
     pass
 
 
@@ -24,4 +24,4 @@ class AddressAdmin(ModelAdmin):
 
 admin.site.register(Address, AddressAdmin)
 admin.site.register(City, CityAdmin)
-admin.site.register(Town, TownAdmin)
+admin.site.register(Township, TownshipAdmin)

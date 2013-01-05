@@ -17,7 +17,7 @@ class TownshipAdmin(ModelAdmin):
 
 class AddressAdmin(ModelAdmin):
     list_display = (
-        'get_full_name', 'address', 'city', 'township',
+        'get_full_name', 'address', 'city', 'town',
         'user_shipping', 'user_billing')
     raw_id_fields = ('user_shipping', 'user_billing')
 

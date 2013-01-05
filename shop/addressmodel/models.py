@@ -59,6 +59,7 @@ class Township(models.Model):
 class Address(models.Model):
     user_shipping = models.OneToOneField(User, related_name='shipping_address',
                                          blank=True, null=True)
+
     user_billing = models.OneToOneField(User, related_name='billing_address',
                                         blank=True, null=True)
 

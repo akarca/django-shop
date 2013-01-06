@@ -7,9 +7,13 @@ from shop.addressmodel.models import City, Township, Address
 #    pass
 #admin.site.register(Client, ClientAdmin)
 
+class TownshipInline(admin.StackedInline):
+    model = Township
+
 
 class CityAdmin(ModelAdmin):
-    pass
+    inlines = [TownshipInline]
+
 
 class TownshipAdmin(ModelAdmin):
     pass

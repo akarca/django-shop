@@ -56,13 +56,7 @@ class Township(models.Model):
         return self.name
 
 
-class Address(models.Model):
-    user_shipping = models.OneToOneField(User, related_name='shipping_address',
-                                         blank=True, null=True)
-
-    user_billing = models.OneToOneField(User, related_name='billing_address',
-                                        blank=True, null=True)
-
+class BaseAddress(models.Model):
     first_name = models.CharField(max_length=50,
                                   verbose_name=u"Ad")
     last_name = models.CharField(max_length=50,
@@ -93,6 +87,9 @@ class Address(models.Model):
                                      blank=True,
                                      null=True)
 
+    class Meta:
+        abstract = True
+
     def as_text(self):
         return """
         %s
@@ -105,8 +102,7 @@ class Address(models.Model):
                self.phone)
 
     def clone(self):
-        new_kwargs = dict([(fld.name, getattr(self, fld.name))
-                           for fld in self._meta.fields if fld.name != 'id'])
+        new_kwargs = dict([(fld.name, getattr(self, fld.name)) for fld in self._meta.fields if fld.name != 'id'])
         return self.__class__.objects.create(**new_kwargs)
 
     def __unicode__(self):
@@ -114,6 +110,15 @@ class Address(models.Model):
 
     def get_full_name(self):
         return u"%s %s" % (self.first_name.strip(), self.last_name.strip())
+
+
+class Address(BaseAddress):
+    user_shipping = models.OneToOneField(User, related_name='shipping_address',
+                                         blank=True, null=True)
+
+    user_billing = models.OneToOneField(User, related_name='billing_address',
+                                        blank=True, null=True)
+
 
 
 # class Address(models.Model):

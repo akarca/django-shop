@@ -72,8 +72,7 @@ class BaseAddress(models.Model):
                                    null=True)
     phone = models.CharField(max_length=13,
                              verbose_name=u"Telefon",
-                             null=True,
-                             blank=True)
+                             null=True)
     id_number = models.CharField(max_length=11,
                                  verbose_name=u"TC Kimlik No",
                                  blank=True,

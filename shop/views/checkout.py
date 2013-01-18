@@ -20,6 +20,8 @@ from shop.util.order import add_order_to_request, get_order_from_request
 from shop.views import ShopTemplateView, ShopView
 from shop.util.login_mixin import LoginMixin
 
+from absurdaccount.forms import ShippingForm
+
 
 class CheckoutSelectionView(LoginMixin, ShopTemplateView):
     template_name = 'shop/checkout/selection.html'
@@ -29,7 +31,7 @@ class CheckoutSelectionView(LoginMixin, ShopTemplateView):
         Returns a dynamic ModelForm from the loaded AddressModel
         """
         form_class = model_forms.modelform_factory(
-            AddressModel, exclude=['user_shipping', 'user_billing'])
+            AddressModel, form=ShippingForm)
         return form_class
 
     def get_shipping_form_class(self):
